@@ -1,15 +1,9 @@
 import {useState, useEffect, Fragment} from 'react'
+import { MongoClient } from "mongodb";
 import Link from 'next/link'
 
-function HomePage(){
-  const [atoms, setAtoms] = useState([])
-  
-  useEffect(()=>{
-    async function getAtoms(){
-      await fetch('./api/atoms').then(response => {return response.json()}).then(values=>{setAtoms(values)})
-    }
-    getAtoms()
-  },[])
+function HomePage(props){
+  const atoms = JSON.parse(props.dft)
   return (
     <div
       style={{
@@ -56,4 +50,22 @@ function HomePage(){
     </div>
   );
 }
+export async function getStaticProps(){
+  const client = await MongoClient.connect(
+    "mongodb+srv://212083:ForIonia@achilles.ckale.mongodb.net/?retryWrites=true&w=majority"
+  );
+  const db = client.db("G305");
+  const collection = db.collection("atomb3lyp631gd");
+  const data = await collection.find().toArray();
+  const sorted = await data.sort((a, b) => {
+    if (parseInt(a.Z) < parseInt(b.Z)) {
+      return -1;
+    }
+  });
+  return{
+  props:{
+    dft:JSON.stringify(sorted)}
+  }
+  }
+
 export default HomePage;

@@ -64,12 +64,12 @@ function DetailPage() {
           {dft.map((item, index) => {
             console.log(item);
             return (
-              <tr>
+              <tr key={index}>
                 {item.map((item, index) => {
                   return (
                     <>
-                      <td key={{ `${index}one` }}>{item[0].slice(0, -3)}</td>
-                      <td key={{ `${index}two` }}>{item[1].toPrecision(8)}</td>
+                      <td key={{index}}>{item[0].slice(0, -3)}</td>
+                      <td key={{index}}>{item[1].toPrecision(8)}</td>
                     </>
                   );
                 })}
