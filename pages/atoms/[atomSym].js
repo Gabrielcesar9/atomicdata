@@ -60,7 +60,7 @@ function DetailPage() {
 
       <table style={{ margin: "auto" }}>
         <tbody>
-          <th colspan="10">Hartree-Fock Density Functional Theory Energies </th>
+          <th colSpan="10">Hartree-Fock Density Functional Theory Energies </th>
           {dft.map((item, index) => {
             console.log(item);
             return (
@@ -68,8 +68,8 @@ function DetailPage() {
                 {item.map((item, index) => {
                   return (
                     <>
-                      <td>{item[0].slice(0, -3)}</td>
-                      <td>{item[1].toPrecision(8)}</td>
+                      <td key={{ `${index}one` }}>{item[0].slice(0, -3)}</td>
+                      <td key={{ `${index}two` }}>{item[1].toPrecision(8)}</td>
                     </>
                   );
                 })}
