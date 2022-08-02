@@ -21,6 +21,7 @@ function HomePage(){
       {atoms.map((item, index) => {
         return (
           <Link
+          key={index}
             href={{
               pathname: `/atoms/${item.sym}`,
               query: { data: JSON.stringify(item) },
